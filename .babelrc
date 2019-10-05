@@ -1,11 +1,14 @@
 {
-    "presets": [
-      [
-        "@babel/preset-env",
-        {
-          "useBuiltIns": "entry",
-          "corejs": "3.0.0"
-        }
-      ]
+  "presets": [
+    [
+      "@babel/preset-env",
+      {
+        "useBuiltIns": "entry",
+        "corejs": "3.0.0"
+      }
     ]
-  }
+  ],
+  "plugins": [
+    ["import-to-require", { "modules": ["regl", "regl-camera", "glslify"] }]
+  ]
+}

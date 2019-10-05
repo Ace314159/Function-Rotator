@@ -1,10 +1,13 @@
+import reglBase from 'regl';
+import reglCamera from 'regl-camera';
+import glsl from 'glslify';
+
 // Canvas
 const canvas = document.getElementById('canvas');
 
 // OpenGL
-export const regl = require('regl')(canvas);
-const glslify = require('glslify');
-export const camera = require('regl-camera')(regl, {
+export const regl = reglBase(canvas);
+export const camera = reglCamera(regl, {
   center: [0, 0, 0],
   zoomSpeed: 0.5,
   rotationSpeed: 0.5,
@@ -40,8 +43,8 @@ const createDisc = {
 };
 
 const drawAxis = regl({
-  frag: glslify('./shaders/solidColor.frag'),
-  vert: glslify('./shaders/default.vert'),
+  frag: glsl('./shaders/solidColor.frag'),
+  vert: glsl('./shaders/default.vert'),
   attributes: {
     position: regl.prop('position'),
   },
@@ -53,8 +56,8 @@ const drawAxis = regl({
 });
 
 const drawPartFunc = regl({
-  frag: glslify('./shaders/solidColor.frag'),
-  vert: glslify('./shaders/default.vert'),
+  frag: glsl('./shaders/solidColor.frag'),
+  vert: glsl('./shaders/default.vert'),
   attributes: {
     position: regl.prop('vertices'),
   },
