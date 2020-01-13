@@ -1,9 +1,11 @@
 import { regl, camera, drawFunc } from './graph';
-import { getF, getAxis, getAxisNum } from './form';
+import { getF, getAxis, getAxisNum, getCenter } from './form';
 
 
 regl.frame(() => {
-  camera(() => {
+  camera({
+    center: getCenter(),
+  }, () => {
     regl.clear({
       color: [1, 1, 1, 1],
       depth: 1,

@@ -2,7 +2,17 @@ import { Parser } from 'expr-eval';
 
 const parser = new Parser();
 const fInput = document.getElementById('f');
-const axisNumInput = document.getElementById('axisNum')
+const axisNumInput = document.getElementById('axisNum');
+
+const speed = 0.1;
+let keysPressed = {
+  KeyW: false,
+  KeyA: false,
+  KeyS: false,
+  KeyD: false,
+};
+let centerX = 0;
+let centerY = 0;
 
 export function getF() {
   let returnVal;
@@ -57,4 +67,33 @@ export function getAxisNum() {
   axisNumInput.classList.remove('is-valid');
   axisNumInput.classList.add('is-invalid');
   return null;
+}
+
+function moveCenter() {
+  if (keysPressed.KeyW) {
+    centerY += speed;
+  }
+  if (keysPressed.KeyA) {
+    centerX -= speed;
+  }
+  if (keysPressed.KeyS) {
+    centerY -= speed;
+  }
+  if (keysPressed.KeyD) {
+    centerX += speed;
+  }
+}
+
+document.addEventListener('keydown', (e) => {
+  keysPressed[e.code] = true;
+  moveCenter();
+});
+
+document.addEventListener('keyup', (e) => {
+  keysPressed[e.code] = false;
+  moveCenter();
+});
+
+export function getCenter() {
+  return [centerX, centerY, 0];
 }
